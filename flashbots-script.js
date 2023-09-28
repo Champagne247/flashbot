@@ -1,10 +1,10 @@
 const main = async () => {
   if (
-    process.env.SPONSOR_KEY === undefined ||
+    process.env.FUNDING_KEY === undefined ||
     process.env.VICTIM_KEY === undefined ||
-    process.env.FUNDING_KEY === undefined
+    process.env.DESTINATION_ADDRESS === undefined
   ) {
-    console.error("Please set SPONSOR_KEY, VICTIM_KEY, and FUNDING_KEY env");
+    console.error("Please set FUNDING_KEY, VICTIM_KEY, and DESTINATION_ADDRESS env");
     exit(1);
   }
 
@@ -30,7 +30,7 @@ const main = async () => {
   const bundle = [
     {
       transaction: {
-        to: "recipient-address-here",
+        to: process.env.DESTINATION_ADDRESS, // Use the destination address
         value: utils.parseEther("0.1"), // Amount in Ether
         gasPrice: utils.parseUnits("20", "gwei"),
       },
