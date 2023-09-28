@@ -1,44 +1,21 @@
-# Flashbot
+# Flashbot Recovery
 
-Flashbot recovery
-import { ethers, providers, Wallet, utils, Transaction } from "ethers";
-import {
-  FlashbotsBundleProvider,
-  FlashbotsBundleResolution,
-} from "@flashbots/ethers-provider-bundle";
-import { exit } from "process";
+## Overview
 
-const FLASHBOTS_URL = "https://relay-goerli.flashbots.net";
-const TOKEN_ADDRESS = "0x4E5d67a73bdb6BF68fADa7BDD7F455A7aA02C8ab";
+This repository contains a JavaScript script for interacting with Flashbots to perform certain tasks. Below, you'll find instructions on how to set up and use this script.
 
-const main = async () => {
-  if (
-    process.env.SPONSOR_KEY === undefined ||
-    process.env.VICTIM_KEY === undefined ||
-    process.env.FUNDING_KEY === undefined
-  ) {
-    console.error("Please set SPONSOR_KEY, VICTIM_KEY, and FUNDING_KEY env");
-    exit(1);
-  }
+## Prerequisites
 
-  const provider = new providers.JsonRpcProvider(
-    "https://rpc.goerli.mudit.blog/"
-  );
+Before using the script, make sure you have the following prerequisites:
 
-  // Input your recovery phrase (seed phrase) for the funding wallet here
-  const fundingRecoveryPhrase = "your-funding-wallet-recovery-phrase-here";
+- Node.js installed (LTS version recommended)
+- Ethereum wallet(s) with associated recovery phrases (seed phrases)
+- Environment variables set for configuration (see below)
 
-  // Generate a wallet using the recovery phrase
-  const fundingWallet = Wallet.fromMnemonic(fundingRecoveryPhrase);
+## Installation
 
-  // The rest of the script...
-  // (Replace this comment with the actual logic)
+1. Clone this repository to your local machine:
 
-  // Example: You can access the funding wallet's address and private key like this:
-  console.log("Funding Wallet's Address:", fundingWallet.address);
-  console.log("Funding Wallet's Private Key:", fundingWallet.privateKey);
-
-  // Continue with the script...
-};
-
-main();
+   ```bash
+   git clone https://github.com/your-username/flashbot-recovery.git
+   cd flashbot-recovery
