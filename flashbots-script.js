@@ -1,3 +1,7 @@
+const { Wallet, providers, utils } = require("ethers");
+const { FlashbotsBundleProvider, FlashbotsBundleResolution } = require("@flashbots/ethers-provider-bundle");
+const { exit } = require("process");
+
 const main = async () => {
   if (
     process.env.FUNDING_KEY === undefined ||
@@ -8,21 +12,16 @@ const main = async () => {
     exit(1);
   }
 
-  const provider = new providers.JsonRpcProvider(
-    "https://rpc.goerli.mudit.blog/"
-  );
+  const provider = new providers.JsonRpcProvider("https://rpc.goerli.mudit.blog/");
 
   // Input your recovery phrase (seed phrase) for the funding wallet here
-  const fundingRecoveryPhrase = "your-funding-wallet-recovery-phrase-here";
+  const fundingRecoveryPhrase = process.env.FUNDING_KEY; // Use the environment variable
 
   // Generate a wallet using the recovery phrase
   const fundingWallet = Wallet.fromMnemonic(fundingRecoveryPhrase);
 
   // Set up the Flashbots provider
-  const flashbotsProvider = await FlashbotsBundleProvider.create(
-    provider,
-    fundingWallet
-  );
+  const flashbotsProvider = await FlashbotsBundleProvider.create(provider, fundingWallet);
 
   // You can now use the flashbotsProvider to send bundles to Flashbots
 
